@@ -338,9 +338,8 @@ export default function HouseScene({ loc, onSelect }: { loc: CampLoc; onSelect: 
       )}
 
       {/* lieu courant */}
-      <div className="absolute inset-x-3 bottom-3 rounded-xl bg-black/60 px-3 py-2 text-center backdrop-blur">
-        <span className="text-xs font-bold text-[#f2d16b]">{target.icon} {target.label}</span>
-        <span className="ml-1.5 hidden text-[11px] text-[#ece6d6]/80 sm:inline">— {target.desc}</span>
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-[10px] font-bold text-[#f2d16b] backdrop-blur pointer-events-none">
+        {target.icon} {target.label}
       </div>
     </div>
   );
