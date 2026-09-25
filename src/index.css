@@ -139,6 +139,44 @@ select.input-viking { appearance: none; }
   100% { transform: translateX(240%) skewX(-18deg); }
 }
 
+/* ---- marche du viking ---- */
+@keyframes walkBob { 0%,100% { transform: translateY(0); } 25% { transform: translateY(-3px); } 75% { transform: translateY(-1px); } }
+@keyframes legSwingA { 0%,100% { transform: rotate(16deg); } 50% { transform: rotate(-16deg); } }
+@keyframes legSwingB { 0%,100% { transform: rotate(-16deg); } 50% { transform: rotate(16deg); } }
+@keyframes armSwingA { 0%,100% { transform: rotate(-14deg); } 50% { transform: rotate(14deg); } }
+@keyframes armSwingB { 0%,100% { transform: rotate(14deg); } 50% { transform: rotate(-14deg); } }
+.walking .viking-body { animation: walkBob .42s ease-in-out infinite; }
+.walking .leg-a, .walking .arm-a { transform-box: fill-box; transform-origin: 50% 0%; animation: legSwingA .42s ease-in-out infinite; }
+.walking .leg-b, .walking .arm-b { transform-box: fill-box; transform-origin: 50% 0%; animation: legSwingB .42s ease-in-out infinite; }
+.walking .arm-a { animation-name: armSwingA; }
+.walking .arm-b { animation-name: armSwingB; }
+
+@keyframes dustPuff {
+  0% { transform: translate(0, 0) scale(.4); opacity: 0; }
+  30% { opacity: .55; }
+  100% { transform: translate(var(--dx, 6px), -9px) scale(1.15); opacity: 0; }
+}
+.dust { opacity: 0; }
+.walking .dust { transform-box: fill-box; transform-origin: center; animation: dustPuff .7s ease-out infinite; }
+
+/* ---- marqueurs de lieux ---- */
+@keyframes spotPulse {
+  0% { transform: scale(1); opacity: .55; }
+  70% { transform: scale(2); opacity: 0; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.spot-pulse { transform-box: fill-box; transform-origin: center; animation: spotPulse 2.1s ease-out infinite; }
+.spot-hit { cursor: pointer; }
+.spot-hit:hover ~ .spot-marker, .spot-wrap:hover .spot-disc { filter: brightness(1.18); }
+
+@keyframes idleBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+.idle .viking-body { animation: idleBob 3s ease-in-out infinite; }
+
+.chip-loc { transition: transform .12s ease, background .15s ease, border-color .15s ease; }
+.chip-loc:active { transform: scale(.96); }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 @keyframes lootDrop {
   0% { transform: translateY(-10px) scale(.8); opacity: 0; }
   100% { transform: translateY(0) scale(1); opacity: 1; }

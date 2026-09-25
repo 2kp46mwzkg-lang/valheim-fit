@@ -29,6 +29,7 @@ function Splash() {
 function Shell() {
   const { state, loaded } = useGame();
   const [tab, setTab] = useState<TabId>('house');
+  const [arrivalToken, setArrivalToken] = useState(0);
 
   const questBadge = useMemo(() => {
     if (!state.character) return 0;
@@ -90,11 +91,21 @@ function Shell() {
       <div className="relative mx-auto min-h-screen w-full max-w-[520px] bg-[#141b17] shadow-[0_0_80px_-20px_rgba(0,0,0,.9)] lg:border-x lg:border-[#3f5548]/60">
         <Header />
         <main className="px-4 pb-32 pt-4">
-          {tab === 'house' && <House onGoUpload={() => setTab('upload')} />}
-          {tab === 'inventory' && <Inventory />}
-          {tab === 'upload' && <Upload onDone={() => setTab('house')} />}
-          {tab === 'quests' && <Quests onGoUpload={() => setTab('upload')} />}
-          {tab === 'journal' && <Journal />}
+          <div className={tab === 'house' ? '' : 'hidden'}>
+            <House
+              onGoUpload={() => setTab('upload')}
+              onGoQuests={() => setTab('quests')}
+              arrivalToken={arrivalToken}
+            />
+          </div>
+          <div className={tab === 'inventory' ? '' : 'hidden'}><Inventory /></div>
+          <div className={tab === 'upload' ? '' : 'hidden'}>
+            <Upload onDone={() => { setTab('house'); setArrivalToken((t) => t + 1); }} />
+          </div>
+          <div className={tab === 'quests' ? '' : 'hidden'}>
+            <Quests onGoUpload={() => setTab('upload')} />
+          </div>
+          <div className={tab === 'journal' ? '' : 'hidden'}><Journal /></div>
         </main>
         <BottomNav tab={tab} go={setTab} questBadge={questBadge} />
       </div>

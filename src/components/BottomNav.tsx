@@ -3,7 +3,7 @@ import { Backpack, BookOpen, Flame, Home, ScrollText } from 'lucide-react';
 export type TabId = 'house' | 'inventory' | 'upload' | 'quests' | 'journal';
 
 const TABS: { id: TabId; label: string; icon: typeof Home }[] = [
-  { id: 'house', label: 'Maison', icon: Home },
+  { id: 'house', label: 'Camp', icon: Home },
   { id: 'inventory', label: 'Sac', icon: Backpack },
   { id: 'upload', label: 'Retour', icon: Flame },
   { id: 'quests', label: 'Quêtes', icon: ScrollText },
