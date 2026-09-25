@@ -50,4 +50,6 @@ export interface SaveState {
   buff: { mult: number; label: string } | null;
   totalPoints: number;
   sessions: SessionLog[];
+  skillPoints: number;
+  skills: Record<string, number>;
 }

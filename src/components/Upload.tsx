@@ -84,14 +84,22 @@ export default function Upload({ onDone }: { onDone: () => void }) {
             {result.buff && (
               <p className="mt-1 text-xs text-[#f2d16b]">🍲 {result.base} × {result.buff.mult} ({result.buff.label})</p>
             )}
+            {result.skillPointsEarned > 0 && (
+              <p className="mt-1 text-xs text-[#c48a4a]">✨ +{result.skillPointsEarned} point{result.skillPointsEarned > 1 ? 's' : ''} de competence</p>
+            )}
             {result.fcmaxUp && (
               <p className="pop mt-2 inline-block rounded-full bg-[#e08a7a]/15 px-3 py-1 text-[11px] font-bold text-[#e08a7a]">
                 ❤️‍🔥 Nouvelle FC max : {state.character!.fcmax} bpm !
               </p>
             )}
           </div>
+          {result.loot._double && (
+            <div className="pop mx-4 mb-2 rounded-xl bg-[#f2d16b]/15 px-3 py-2 text-center text-xs font-bold text-[#f2d16b]">
+              🍀 Butin double !
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-2 p-4">
-            {Object.entries(result.loot).map(([k, v], i) => (
+            {Object.entries(result.loot).filter(([k]) => k !== '_double').map(([k, v], i) => (
               <div key={k} className="loot-drop flex items-center gap-2.5 rounded-xl border border-[#3f5548] bg-[#1a241f] p-3 text-left" style={{ animationDelay: `${i * 80}ms` }}>
                 <span className="text-3xl">{ITEMS[k]?.icon}</span>
                 <div>

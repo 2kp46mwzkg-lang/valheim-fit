@@ -8,7 +8,7 @@ import BottomNav, { type TabId } from './components/BottomNav';
 import House from './components/House';
 import Inventory from './components/Inventory';
 import Upload from './components/Upload';
-import Quests from './components/Quests';
+import SkillTree from './components/SkillTree';
 import Journal from './components/Journal';
 
 function Splash() {
@@ -94,7 +94,7 @@ function Shell() {
           <div className={tab === 'house' ? '' : 'hidden'}>
             <House
               onGoUpload={() => setTab('upload')}
-              onGoQuests={() => setTab('quests')}
+              onGoQuests={() => setTab('skills')}
               arrivalToken={arrivalToken}
             />
           </div>
@@ -102,9 +102,7 @@ function Shell() {
           <div className={tab === 'upload' ? '' : 'hidden'}>
             <Upload onDone={() => { setTab('house'); setArrivalToken((t) => t + 1); }} />
           </div>
-          <div className={tab === 'quests' ? '' : 'hidden'}>
-            <Quests onGoUpload={() => setTab('upload')} />
-          </div>
+          <div className={tab === 'skills' ? '' : 'hidden'}><SkillTree /></div>
           <div className={tab === 'journal' ? '' : 'hidden'}><Journal /></div>
         </main>
         <BottomNav tab={tab} go={setTab} questBadge={questBadge} />
